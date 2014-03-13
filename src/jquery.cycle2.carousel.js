@@ -202,11 +202,14 @@ $.fn.cycle.transitions.carousel = {
             }
             else if ( !fwd && opts.nextSlide == opts.slideCount - 1 ) {
                 // moving from first slide to last
-                moveBy = this.getDim( opts, opts.currSlide, vert );
+                moveBy = this.getDim( opts, opts.slideCount - 1, vert ); //getDim of last slide
                 callback = this.genCallback( opts, fwd, vert, callback );
             }
             else {
-                moveBy = this.getScroll( opts, vert, opts.currSlide, hops );
+                 //if fwd, use dim of current slide.
+                 //if bkwd, use dim of previous slide.
+                 moveBy = (fwd) ? this.getScroll( opts, vert, opts.currSlide, hops ) : this.getScroll( opts, vert, opts.currSlide-1, hops );
+                 
             }
         }
 
